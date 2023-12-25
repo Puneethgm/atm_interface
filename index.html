@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>ATM Interface</h1>
+    
+    <form id="atmForm">
+        <label for="userId">User ID (4 digits): </label>
+        <input type="text" id="userId" name="userId" pattern="\d{4}" required>
+        <br>
+        
+        <label for="pin">PIN (4 digits): </label>
+        <input type="password" id="pin" name="pin" pattern="\d{4}" required>
+        <br>
+        
+        <button type="button" onclick="initializeATM()">Initialize ATM</button>
+    </form>
+
+    <div id="menu" style="display: none;">
+        <h2>ATM Menu</h2>
+        
+        <button onclick="showTransactionHistory()">1. Transactions History</button><br>
+        <button onclick="withdraw()">2. Withdraw</button><br>
+        <button onclick="deposit()">3. Deposit</button><br>
+        <button onclick="transfer()">4. Transfer</button><br>
+        <button onclick="quit()">5. Quit</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let atm;
+
+        function initializeATM() {
+            const userId = document.getElementById("userId").value;
+            const pin = document.getElementById("pin").value;
+
+            try {
+                atm = new ATM(parseInt(userId), parseInt(pin));
+                document.getElementById("menu").style.display = "block";
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        function showTransactionHistory() {
+            atm.show_transaction_history();
+        }
+
+        function withdraw() {
+            const amount = parseFloat(prompt("Enter withdrawal amount: $"));
+            atm.withdraw(amount);
+        }
+
+        function deposit() {
+            const amount = parseFloat(prompt("Enter deposit amount: $"));
+            atm.deposit(amount);
+        }
+
+        function transfer() {
+            const amount = parseFloat(prompt("Enter transfer amount: $"));
+            const recipientAccount = prompt("Enter recipient's account: ");
+            atm.transfer(amount, recipientAccount);
+        }
+
+        function quit() {
+            alert("Exiting ATM. Thank you!");
+            document.getElementById("menu").style.display = "none";
+        }
+    </script>
+</body>
+</html>
