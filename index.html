@@ -7,82 +7,75 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        form {
-            display: inline-block;
-            text-align: left;
+        .atm-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>ATM Interface</h1>
-    
-    <form id="atmForm">
-        <label for="userId">User ID (4 digits): </label>
-        <input type="text" id="userId" name="userId" pattern="\d{4}" required>
-        <br>
-        
-        <label for="pin">PIN (4 digits): </label>
-        <input type="password" id="pin" name="pin" pattern="\d{4}" required>
-        <br>
-        
-        <button type="button" onclick="initializeATM()">Initialize ATM</button>
-    </form>
 
-    <div id="menu" style="display: none;">
-        <h2>ATM Menu</h2>
-        
-        <button onclick="showTransactionHistory()">1. Transactions History</button><br>
-        <button onclick="withdraw()">2. Withdraw</button><br>
-        <button onclick="deposit()">3. Deposit</button><br>
-        <button onclick="transfer()">4. Transfer</button><br>
-        <button onclick="quit()">5. Quit</button>
-        
-        <div id="result"></div>
+    <div class="atm-container">
+        <h2>ATM Interface</h2>
+        <label for="pin">Enter PIN:</label>
+        <input type="password" id="pin" name="pin" placeholder="Enter your PIN">
+
+        <br>
+
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" name="amount" placeholder="Enter amount">
+
+        <br>
+
+        <button onclick="withdraw()">Withdraw</button>
+        <button onclick="checkBalance()">Check Balance</button>
+        <button onclick="changePin()">Change PIN</button>
     </div>
 
     <script>
-        let atm;
-
-        function initializeATM() {
-            const userId = document.getElementById("userId").value;
-            const pin = document.getElementById("pin").value;
-
-            try {
-                atm = new ATM(parseInt(userId), parseInt(pin));
-                document.getElementById("menu").style.display = "block";
-            } catch (error) {
-                alert(error.message);
-            }
-        }
-
-        function showTransactionHistory() {
-            atm.show_transaction_history();
-        }
-
         function withdraw() {
-            const amount = parseFloat(prompt("Enter withdrawal amount: $"));
-            atm.withdraw(amount);
+            alert("Withdrawal functionality is not available in this example.");
         }
 
-        function deposit() {
-            const amount = parseFloat(prompt("Enter deposit amount: $"));
-            atm.deposit(amount);
+        function checkBalance() {
+            alert("Checking balance functionality is not available in this example.");
         }
 
-        function transfer() {
-            const amount = parseFloat(prompt("Enter transfer amount: $"));
-            const recipientAccount = prompt("Enter recipient's account: ");
-            atm.transfer(amount, recipientAccount);
-        }
-
-        function quit() {
-            alert("Exiting ATM. Thank you!");
-            document.getElementById("menu").style.display = "none";
+        function changePin() {
+            alert("Change PIN functionality is not available in this example.");
         }
     </script>
+
 </body>
 </html>
